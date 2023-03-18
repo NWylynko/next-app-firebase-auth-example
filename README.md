@@ -1,0 +1,1 @@
+# next-app-firebase-auth-example
