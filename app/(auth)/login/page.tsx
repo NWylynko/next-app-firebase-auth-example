@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect } from "react";
-import GoogleLogin from "./Google";
 import { useSession } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+
+import GoogleLogin from "./Google";
+import AnonLogin from "./Anon";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -19,6 +21,7 @@ export default function LoginPage() {
     <main>
       <h1>Login</h1>
       <GoogleLogin />
+      <AnonLogin />
     </main>
   )
 }
