@@ -87,7 +87,7 @@ const useAuthStore = create<AuthStore>()((set, get) => ({
     console.log("firebaseUser", firebaseUser);
 
     if (firebaseUser) {
-      const user: ClientSideAuthDetails =  {
+      const user: ClientSideAuthDetails = {
         authId: firebaseUser.uid,
         name: firebaseUser.displayName ?? undefined,
         picture: firebaseUser.photoURL ?? undefined,
@@ -100,9 +100,11 @@ const useAuthStore = create<AuthStore>()((set, get) => ({
       set({ gotSession: true });
 
       sessionTimeout = setTimeout(async () => {
+        const jwt = await firebaseUser.getIdToken(true);
         // the data.expiry here could be anything
         const data = await fetchSession(jwt);
         sessionInterval = setInterval(async () => {
+          const jwt = await firebaseUser.getIdToken(true);
           // the data.expiry here is a standard interval (eg 15 minutes)
           await fetchSession(jwt);
         }, data.expiry);
